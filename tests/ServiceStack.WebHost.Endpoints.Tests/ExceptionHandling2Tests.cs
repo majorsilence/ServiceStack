@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
-using NUnit.Framework;
-using ProtoBuf;
-using ServiceStack.Plugins.ProtoBuf;
+﻿using NUnit.Framework;
 using ServiceStack.Service;
 using ServiceStack.ServiceClient.Web;
 using ServiceStack.ServiceHost;
 using ServiceStack.ServiceInterface.ServiceModel;
+using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace ServiceStack.WebHost.Endpoints.Tests
 {
@@ -94,7 +92,8 @@ namespace ServiceStack.WebHost.Endpoints.Tests
             if (request.Age.HasValue && request.Age <= 0)
                 throw new ArgumentException("Invalid Age");
 
-            var response = new SearchReqstarsResponse {
+            var response = new SearchReqstarsResponse
+            {
                 Total = 2,
                 Aged = 10,
                 Results = new List<Reqstar> {
@@ -114,7 +113,8 @@ namespace ServiceStack.WebHost.Endpoints.Tests
             if (request.Age.HasValue && request.Age <= 0)
                 throw new ArgumentException("Invalid Age");
 
-            var response = new ReqstarsResponse() {
+            var response = new ReqstarsResponse()
+            {
                 Total = 2,
                 Aged = 10,
                 Results = new List<Reqstar> {
@@ -126,7 +126,7 @@ namespace ServiceStack.WebHost.Endpoints.Tests
             return response;
         }
     }
-    
+
     public class AppHost : AppHostHttpListenerBase
     {
         public AppHost()
@@ -136,7 +136,6 @@ namespace ServiceStack.WebHost.Endpoints.Tests
 
         public override void Configure(Funq.Container container)
         {
-            Plugins.Add(new ProtoBufFormat());
         }
     }
 
@@ -170,13 +169,12 @@ namespace ServiceStack.WebHost.Endpoints.Tests
             appHost = null;
         }
 
-        static IRestClient[] ServiceClients = 
-		{
-			new JsonServiceClient(testUri),
-			new XmlServiceClient(testUri),
-			new JsvServiceClient(testUri),
-			new ProtoBufServiceClient(testUri)
-		};
+        static IRestClient[] ServiceClients =
+        {
+            new JsonServiceClient(testUri),
+            new XmlServiceClient(testUri),
+            new JsvServiceClient(testUri),
+        };
 
 
         /// <summary>

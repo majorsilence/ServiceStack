@@ -1,7 +1,5 @@
 ﻿#define HTTP_LISTENER
 using Funq;
-using ServiceStack.Authentication.OAuth2;
-using ServiceStack.Authentication.OpenId;
 using ServiceStack.CacheAccess;
 using ServiceStack.CacheAccess.Providers;
 using ServiceStack.Configuration;
@@ -9,7 +7,6 @@ using ServiceStack.FluentValidation;
 using ServiceStack.MiniProfiler;
 using ServiceStack.MiniProfiler.Data;
 using ServiceStack.OrmLite;
-using ServiceStack.Razor;
 using ServiceStack.ServiceInterface;
 using ServiceStack.ServiceInterface.Admin;
 using ServiceStack.ServiceInterface.Auth;
@@ -33,16 +30,15 @@ namespace ServiceStack.AuthWeb.Tests
 
         public override void Configure(Container container)
         {
-            Plugins.Add(new RazorFormat());
 
             container.Register(new DataSource());
 
             container.Register<IDbConnectionFactory>(
                 new OrmLiteConnectionFactory(":memory:", false, //ConnectionString in Web.Config
                     SqliteDialect.Provider)
-                    {
-                        ConnectionFilter = x => new ProfiledDbConnection(x, Profiler.Current)
-                    });
+                {
+                    ConnectionFilter = x => new ProfiledDbConnection(x, Profiler.Current)
+                });
 
             using (var db = container.Resolve<IDbConnectionFactory>().Open())
             {
@@ -83,17 +79,8 @@ namespace ServiceStack.AuthWeb.Tests
                     new FacebookAuthProvider(appSettings),      //Sign-in with Facebook
                     new DigestAuthProvider(appSettings),        //Sign-in with Digest Auth
                     new BasicAuthProvider(),                    //Sign-in with Basic Auth
-                    new GoogleOpenIdOAuthProvider(appSettings), //Sign-in with Google OpenId
-                    new YahooOpenIdOAuthProvider(appSettings),  //Sign-in with Yahoo OpenId
-                    new OpenIdOAuthProvider(appSettings),       //Sign-in with Custom OpenId
-                    new GoogleOAuth2Provider(appSettings),      //Sign-in with Google OAuth2 Provider
-                    new LinkedInOAuth2Provider(appSettings),    //Sign-in with LinkedIn OAuth2 Provider
+                   
                 }));
-
-#if HTTP_LISTENER
-            //Required for DotNetOpenAuth in HttpListener 
-            OpenIdOAuthProvider.OpenIdApplicationStore = new InMemoryOpenIdApplicationStore();
-#endif
 
             //Provide service for new users to register so they can login with supplied credentials.
             Plugins.Add(new RegistrationFeature());
