@@ -63,11 +63,6 @@ namespace ServiceStack.Common.Extensions
             return list;
         }
 
-        public static HashSet<T> ToHashSet<T>(this IEnumerable<T> items)
-        {
-            return Proxy.ToHashSet(items);
-        }
-
         public static List<To> SafeConvertAll<To, From>(this IEnumerable<From> items, Func<From, To> converter)
         {
             return Proxy.SafeConvertAll(items, converter);

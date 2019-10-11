@@ -13,11 +13,6 @@ namespace ServiceStack.Common
             return collection == null || collection.Count == 0;
         }
 
-        public static HashSet<T> ToHashSet<T>(this IEnumerable<T> items)
-        {
-            return new HashSet<T>(items);
-        }
-
         public static List<To> SafeConvertAll<To, From>(this IEnumerable<From> items, Func<From, To> converter)
         {
             return items == null ? new List<To>() : Extensions.EnumerableExtensions.ConvertAll(items, converter);
