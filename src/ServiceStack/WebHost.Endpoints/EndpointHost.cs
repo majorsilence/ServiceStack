@@ -7,7 +7,6 @@ using ServiceStack.CacheAccess;
 using ServiceStack.CacheAccess.Providers;
 using ServiceStack.Common;
 using ServiceStack.Common.Web;
-using ServiceStack.Html;
 using ServiceStack.IO;
 using ServiceStack.Messaging;
 using ServiceStack.MiniProfiler;
@@ -33,8 +32,6 @@ namespace ServiceStack.WebHost.Endpoints
 
         public static List<Action<IHttpRequest, IHttpResponse, object>> ResponseFilters { get; private set; }
 
-        public static List<IViewEngine> ViewEngines { get; set; }
-
         //TODO: rename to UncaughtExceptionsHandler
         public static HandleUncaughtExceptionDelegate ExceptionHandler { get; set; }
 
@@ -59,12 +56,10 @@ namespace ServiceStack.WebHost.Endpoints
             RawRequestFilters = new List<Action<IHttpRequest, IHttpResponse>>();
             RequestFilters = new List<Action<IHttpRequest, IHttpResponse, object>>();
             ResponseFilters = new List<Action<IHttpRequest, IHttpResponse, object>>();
-            ViewEngines = new List<IViewEngine>();
             CatchAllHandlers = new List<HttpHandlerResolverDelegate>();
             Plugins = new List<IPlugin> {
                 new HtmlFormat(),
                 new CsvFormat(),
-                new MarkdownFormat(),
                 new PredefinedRoutesFeature(),
                 new MetadataFeature(),
             };
@@ -132,9 +127,6 @@ namespace ServiceStack.WebHost.Endpoints
 
             if ((Feature.Csv & config.EnableFeatures) != Feature.Csv)
                 Plugins.RemoveAll(x => x is CsvFormat);
-
-            if ((Feature.Markdown & config.EnableFeatures) != Feature.Markdown)
-                Plugins.RemoveAll(x => x is MarkdownFormat);
 
             if ((Feature.PredefinedRoutes & config.EnableFeatures) != Feature.PredefinedRoutes)
                 Plugins.RemoveAll(x => x is PredefinedRoutesFeature);

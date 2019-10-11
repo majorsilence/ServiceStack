@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using ServiceStack.Html;
 using ServiceStack.IO;
 using ServiceStack.ServiceHost;
 
@@ -62,10 +61,6 @@ namespace ServiceStack.WebHost.Endpoints
 		/// </summary>
 		List<Action<IHttpRequest, IHttpResponse, object>> ResponseFilters { get; }
 
-		/// <summary>
-		/// Add alternative HTML View Engines
-		/// </summary>
-		List<IViewEngine> ViewEngines { get; }
 
         /// <summary>
         /// Provide an exception handler for un-caught exceptions

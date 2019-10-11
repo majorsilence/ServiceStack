@@ -4,7 +4,6 @@ using System.Linq;
 using System.Reflection;
 using Funq;
 using ServiceStack.Common.Web;
-using ServiceStack.Html;
 using ServiceStack.IO;
 using ServiceStack.ServiceHost;
 using ServiceStack.VirtualPath;
@@ -36,7 +35,6 @@ namespace ServiceStack.ServiceInterface.Testing
             this.PreRequestFilters = new List<Action<IHttpRequest, IHttpResponse>>();
             this.RequestFilters = new List<Action<IHttpRequest, IHttpResponse, object>>();
             this.ResponseFilters = new List<Action<IHttpRequest, IHttpResponse, object>>();
-            this.ViewEngines = new List<IViewEngine>();
             this.CatchAllHandlers = new List<HttpHandlerResolverDelegate>();
 			this.VirtualPathProvider = new FileSystemVirtualPathProvider(this);
 		}
@@ -69,8 +67,6 @@ namespace ServiceStack.ServiceInterface.Testing
         public List<Action<IHttpRequest, IHttpResponse, object>> RequestFilters { get; set; }
 
         public List<Action<IHttpRequest, IHttpResponse, object>> ResponseFilters { get; set; }
-
-        public List<IViewEngine> ViewEngines { get; private set; }
 
         public HandleUncaughtExceptionDelegate ExceptionHandler { get; set; }
 

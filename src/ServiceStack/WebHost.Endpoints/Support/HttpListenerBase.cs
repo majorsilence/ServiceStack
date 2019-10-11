@@ -11,7 +11,6 @@ using Funq;
 using ServiceStack.Common;
 using ServiceStack.Common.Web;
 using ServiceStack.Configuration;
-using ServiceStack.Html;
 using ServiceStack.IO;
 using ServiceStack.Logging;
 using ServiceStack.ServiceHost;
@@ -487,14 +486,6 @@ namespace ServiceStack.WebHost.Endpoints.Support
 				return EndpointHost.ResponseFilters;
 			}
 		}
-
-        public List<IViewEngine> ViewEngines
-        {
-            get
-            {
-                return EndpointHost.ViewEngines;
-            }
-        }
 
         public HandleUncaughtExceptionDelegate ExceptionHandler
         {

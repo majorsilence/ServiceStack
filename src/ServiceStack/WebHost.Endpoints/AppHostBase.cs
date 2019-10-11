@@ -7,7 +7,6 @@ using System.Web;
 using Funq;
 using ServiceStack.Common;
 using ServiceStack.Configuration;
-using ServiceStack.Html;
 using ServiceStack.IO;
 using ServiceStack.Logging;
 using ServiceStack.ServiceHost;
@@ -205,13 +204,6 @@ namespace ServiceStack.WebHost.Endpoints
 			}
 		}
 
-        public List<IViewEngine> ViewEngines
-		{
-			get
-			{
-				return EndpointHost.ViewEngines;
-			}
-		}
 
         public HandleUncaughtExceptionDelegate ExceptionHandler
         {

@@ -9,14 +9,12 @@ using System.Runtime.Serialization;
 using System.Web;
 using System.Web.Configuration;
 using System.Xml.Linq;
-using MarkdownSharp;
 using ServiceStack.Common.ServiceModel;
 using ServiceStack.Common.Utils;
 using ServiceStack.Common.Web;
 using ServiceStack.Configuration;
 using ServiceStack.Logging;
 using ServiceStack.Logging.Support.Logging;
-using ServiceStack.Markdown;
 using ServiceStack.ServiceHost;
 using ServiceStack.ServiceModel;
 using ServiceStack.Text;
@@ -94,9 +92,6 @@ namespace ServiceStack.WebHost.Endpoints
                         EnableFeatures = Feature.All,
                         WriteErrorsToResponse = true,
                         ReturnsInnerException = true,
-                        MarkdownOptions = new MarkdownOptions(),
-                        MarkdownBaseType = typeof(MarkdownViewBase),
-                        MarkdownGlobalHelpers = new Dictionary<string, Type>(),
                         HtmlReplaceTokens = new Dictionary<string, string>(),
                         AddMaxAgeForStaticMimeTypes = new Dictionary<string, TimeSpan> {
 							{ "image/gif", TimeSpan.FromHours(1) },
@@ -179,9 +174,6 @@ namespace ServiceStack.WebHost.Endpoints
             this.EnableFeatures = instance.EnableFeatures;
             this.WriteErrorsToResponse = instance.WriteErrorsToResponse;
             this.ReturnsInnerException = instance.ReturnsInnerException;
-            this.MarkdownOptions = instance.MarkdownOptions;
-            this.MarkdownBaseType = instance.MarkdownBaseType;
-            this.MarkdownGlobalHelpers = instance.MarkdownGlobalHelpers;
             this.HtmlReplaceTokens = instance.HtmlReplaceTokens;
             this.AddMaxAgeForStaticMimeTypes = instance.AddMaxAgeForStaticMimeTypes;
             this.AppendUtf8CharsetOnContentTypes = instance.AppendUtf8CharsetOnContentTypes;
@@ -439,9 +431,6 @@ namespace ServiceStack.WebHost.Endpoints
         public bool ReturnsInnerException { get; set; }
         public bool WriteErrorsToResponse { get; set; }
 
-        public MarkdownOptions MarkdownOptions { get; set; }
-        public Type MarkdownBaseType { get; set; }
-        public Dictionary<string, Type> MarkdownGlobalHelpers { get; set; }
         public Dictionary<string, string> HtmlReplaceTokens { get; set; }
 
         public HashSet<string> AppendUtf8CharsetOnContentTypes { get; set; }

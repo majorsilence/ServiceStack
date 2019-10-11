@@ -41,8 +41,6 @@ namespace ServiceStack.WebHost.Endpoints.Formats
             if (httpResult != null && httpResult.Headers.ContainsKey(HttpHeaders.Location))
                 return;
 
-            if (httpReq != null && AppHost.ViewEngines.Any(x => x.ProcessRequest(httpReq, httpRes, response))) return;
-
 			if (requestContext.ResponseContentType != ContentType.Html && httpReq != null
 				&& httpReq.ResponseContentType != ContentType.JsonReport) return;
 

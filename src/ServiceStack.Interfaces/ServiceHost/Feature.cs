@@ -21,7 +21,6 @@ namespace ServiceStack.ServiceHost
 		Csv          = 1 << 8,
 		Html         = 1 << 9,
 		CustomFormat = 1 << 10,
-		Markdown     = 1 << 11,
 		Razor        = 1 << 12,
 		ProtoBuf     = 1 << 13,
 		MsgPack      = 1 << 14,
